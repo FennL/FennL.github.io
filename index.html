@@ -300,7 +300,60 @@
       
         
           
-            
+            <h3 id="Hexo使用"><a href="#Hexo使用" class="headerlink" title="Hexo使用"></a>Hexo使用</h3><p>前提，需要<code>node.js</code>环境</p>
+<h4 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装<code>Hexo</code></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g hexo-cli</span><br></pre></td></tr></table></figure>
+
+<h4 id="初始化博客项目"><a href="#初始化博客项目" class="headerlink" title="初始化博客项目"></a>初始化博客项目</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog ## 默认在桌面打开终端</span><br></pre></td></tr></table></figure>
+
+<h4 id="进行本地预览"><a href="#进行本地预览" class="headerlink" title="进行本地预览"></a>进行本地预览</h4><p>依次输入下面命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo new test_my_site ## 新建文章</span><br><span class="line">在文件夹项目打开终端或者使用cd命令切换进入文件夹</span><br><span class="line">hexo g ## 生成页面</span><br><span class="line">hexo s ## 启动预览</span><br></pre></td></tr></table></figure>
+
+<p>浏览器中访问<code>http://localhost:4000</code>可以观察是否启动成功。</p>
+<p><strong>Tips</strong>:如果出现<code>localhost拒绝了我们的连接请求</code>可能是端口被占用的原因，手动切换hexo端口<code>hexo server -p 5000</code></p>
+<p><img src="https://tva1.sinaimg.cn/large/e6c9d24egy1h413ctor9nj20vh0u0jvz.jpg" alt="image-20220709232736222"></p>
+<h4 id="Hexo命令"><a href="#Hexo命令" class="headerlink" title="Hexo命令"></a>Hexo命令</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo d ## hexo deploy</span><br><span class="line">hexo server # 监视文件变动 自动更新</span><br><span class="line">hexo server -p 5000 # 切换端口</span><br><span class="line">hexo server -i 192.168.1.1 # 自定义ip</span><br></pre></td></tr></table></figure>
+
+<h4 id="推送到GitHub"><a href="#推送到GitHub" class="headerlink" title="推送到GitHub"></a>推送到GitHub</h4><p>在推送之前，需要对站点进行设置以让更多的人访问；对主题进行设置，选择自己喜欢的主题</p>
+<p>打开站点配置文件<code>_config.yml</code> 其实就是给<code>hexo d</code>命令做相应配置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">	<span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">	<span class="attr">repo:</span> <span class="string">https://github.com/FennL/FennL.github.io.git</span></span><br><span class="line">	<span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<p>在这个项目中安装<strong>git部署插件</strong>:<code>npm install hexo-deployer-git --save</code></p>
+<p>再重新启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<h4 id="设置主题"><a href="#设置主题" class="headerlink" title="设置主题"></a>设置主题</h4><p>一般是需要设置主题，因为自带的主题是在是太简陋。</p>
+<p>主题放在<code>/Blog/themes</code>下:</p>
+<p>下载<code>next</code>主题：<code>git clone https://github.com/iissnan/hexo-theme-next themes/next</code></p>
+<p>站点修改配置:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme:next</span><br></pre></td></tr></table></figure>
+
+<p>主题修改配置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Scheme</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">scheme:Muse</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">scheme:Mist</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">scheme:Pisces 选一种</span></span><br><span class="line">scheme:Pisces</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h4><p>进入博客所在目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;My New Post&quot;</span><br></pre></td></tr></table></figure>
+
+<p><code>source</code>文件夹会出现每一篇文章，写完文章之后运行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>将文章渲染并发布</p>
+<h4 id="遇到的坑"><a href="#遇到的坑" class="headerlink" title="遇到的坑"></a>遇到的坑</h4><ul>
+<li>启动服务出现一下乱码</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“ &#123;% extends ‘_layout.swig‘ %&#125; &#123;% import ‘_macro/post.swig‘ as post_template %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>hexo5.0之后缺少<code>swig</code>插件，需要自己安装</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i hexo-renderer-swig</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><code>hexo d</code>出现报错</li>
+</ul>
+<p>使用<code>git</code>仓库的<code>ssh</code>地址，不要使用<code>https</code>地址</p>
+
           
         
       
