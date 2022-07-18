@@ -30,6 +30,25 @@
     
     
     <entry>
+      <title>Location对象和useLocaton函数</title>
+      <link href="/2022/07/17/Location%E5%92%8CuseLocation/"/>
+      <url>/2022/07/17/Location%E5%92%8CuseLocation/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Location对象"><a href="#Location对象" class="headerlink" title="Location对象"></a>Location对象</h2><p><code>Location</code>对象表示当前URL的信息，是<code>window</code>对象的一部分，准确来说是<code>window</code>对象的一个属性，可以通过<code>window.location</code>来访问</p><ul><li><code>hash</code>：可读写<code>#</code>后的URL</li><li>host:可读写主机名和当前URL端口号</li><li>hostname:可读写主机名</li><li>href:可读写完整的URL</li><li>port:读写端口号</li><li>protocal:读写当前URL协议</li><li>search:读写从<code>?</code>开始的URL</li></ul><h2 id="useLocation"><a href="#useLocation" class="headerlink" title="useLocation"></a>useLocation</h2><p>返回当前URL的location对象。每当URL发生变化都会返回一个新的location对象</p><h2 id="history对象"><a href="#history对象" class="headerlink" title="history对象"></a>history对象</h2><p>访问过的URL的信息。</p><ul><li>length:访问过的URL列表长度</li><li>back():后退</li><li>forward():前进</li><li>go()：兼具前进后退的功能</li></ul><h2 id="useHistory"><a href="#useHistory" class="headerlink" title="useHistory"></a>useHistory</h2><p>返回<code>history</code>对象。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> javascript,react,前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2022/07/10/hello-world/"/>
       <url>/2022/07/10/hello-world/</url>
