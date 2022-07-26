@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>Position详解</title>
+      <link href="/2022/07/26/Position%E8%AF%A6%E8%A7%A3/"/>
+      <url>/2022/07/26/Position%E8%AF%A6%E8%A7%A3/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Position详解"><a href="#Position详解" class="headerlink" title="Position详解"></a>Position详解</h1><h4 id="static"><a href="#static" class="headerlink" title="static"></a>static</h4><p>默认，没有定位。不会受到<code>top</code>、<code>bottom</code>、<code>left</code>、<code>right</code>的影响。</p><h4 id="relative"><a href="#relative" class="headerlink" title="relative"></a>relative</h4><p>”元神出窍“，元神会相对于实体移动，方向可以是<code>向上</code>、<code>向下</code>、<code>向左</code>、<code>向右</code>来设置</p><h4 id="absolute"><a href="#absolute" class="headerlink" title="absolute"></a>absolute</h4><p>脱离正常的文档流，会<strong>浮</strong>出来，独立出来</p><h4 id="fixed"><a href="#fixed" class="headerlink" title="fixed"></a>fixed</h4><p>脱离文档流，并且会随着滚动条的滚动而滚动</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> css </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>代理和拦截器</title>
+      <link href="/2022/07/26/%E4%BB%A3%E7%90%86%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8/"/>
+      <url>/2022/07/26/%E4%BB%A3%E7%90%86%E5%92%8C%E6%8B%A6%E6%88%AA%E5%99%A8/</url>
+      
+        <content type="html"><![CDATA[<h1 id="前端本地开发代理配置"><a href="#前端本地开发代理配置" class="headerlink" title="前端本地开发代理配置"></a>前端本地开发代理配置</h1><p>因为同源因素，前端开发过程中往往需要代理，实际上生产的时候不需要代理，后端用<code>nginx</code>同样可以处理跨域问题。</p><p>Vue框架中可以在<code>vue.config.js</code>中的<code>proxy</code>属性中更改配置;webpack也可以在<code>setProxy.js</code>文件中修改<code>proxy</code>属性</p><p>场景：本地开发<code>http://localhost</code>发往<code>http://www.vue.com/api/v1/topics</code>发生的跨域问题</p><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="attr">devServer</span>:&#123;</span><br><span class="line">  <span class="attr">proxy</span>:&#123;</span><br><span class="line">    <span class="string">&#x27;/api&#x27;</span>:&#123; <span class="comment">// /api表示请求中/api开头的请求拦截</span></span><br><span class="line">      <span class="attr">target</span>:<span class="string">&#x27;http://www.vue.com/api&#x27;</span>, <span class="comment">// 这里的域名可以带路径，也可以不带路径，对应两种方案</span></span><br><span class="line">      <span class="attr">changeOrigin</span>:<span class="literal">true</span>,</span><br><span class="line">      <span class="attr">pathRewrite</span>:&#123;</span><br><span class="line">        <span class="string">&#x27;^/api&#x27;</span>:<span class="string">&#x27;&#x27;</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// request.js</span></span><br><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;api/v1/topic&#x27;</span>)</span><br><span class="line">==========================================================================</span><br><span class="line"><span class="comment">// vue.config.js</span></span><br><span class="line"><span class="attr">devServer</span>:&#123;</span><br><span class="line">  <span class="attr">proxy</span>:&#123;</span><br><span class="line">    <span class="string">&#x27;/api&#x27;</span>:&#123; </span><br><span class="line">      <span class="attr">target</span>:<span class="string">&#x27;http://www.vue.com.&#x27;</span>, <span class="comment">// 不带路径</span></span><br><span class="line">      <span class="attr">changeOrigin</span>:<span class="literal">true</span>,</span><br><span class="line">      <span class="comment">// pathRewrite:&#123;        // 不需要对路径重写。因为拼接之后只剩下一个/api/</span></span><br><span class="line">      <span class="comment">//   &#x27;^/api&#x27;:&#x27;&#x27;</span></span><br><span class="line">      <span class="comment">// &#125;</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// request.js</span></span><br><span class="line">axios.<span class="title function_">get</span>(<span class="string">&#x27;api/v1/topic&#x27;</span>)</span><br></pre></td></tr></table></figure><p>可以设置多个代理</p><h1 id="拦截器"><a href="#拦截器" class="headerlink" title="拦截器"></a>拦截器</h1><p><a href="https://www.bilibili.com/index/ding.json">https://www.bilibili.com/index/ding.json</a> 本地向这个链接发送请求</p><ul><li>先配置跨域。将所有请求导向代理中的目标地址</li><li>创建<code>axios实例</code>以及对应的响应拦截器，请求拦截器</li></ul><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">axios.<span class="property">interceptors</span>.<span class="property">request</span>.<span class="title function_">use</span>(<span class="function"><span class="params">config</span> =&gt;</span>&#123;</span><br><span class="line">  config.<span class="property">headers</span>.<span class="property">Authorization</span> = <span class="variable language_">window</span>.<span class="property">sessionStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;token &#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><ul><li>使用<code>axios实例</code>进行正确发送</li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> axios 代理 拦截器 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>React配置代理解决跨域问题</title>
       <link href="/2022/07/21/React%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/"/>
       <url>/2022/07/21/React%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
@@ -52,7 +90,7 @@
       
         <tags>
             
-            <tag> axios,react,前端 </tag>
+            <tag> axios react 前端 </tag>
             
         </tags>
       
@@ -97,7 +135,7 @@
       
         <tags>
             
-            <tag> javascript,react,前端 </tag>
+            <tag> javascript react 前端 </tag>
             
         </tags>
       
