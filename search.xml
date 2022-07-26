@@ -33,26 +33,11 @@
       
         <tags>
             
-            <tag> axios 代理 拦截器 </tag>
+            <tag> axios </tag>
             
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>React配置代理解决跨域问题</title>
-      <link href="/2022/07/21/React%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/"/>
-      <url>/2022/07/21/React%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<h2 id="React配置代理解决跨域问题"><a href="#React配置代理解决跨域问题" class="headerlink" title="React配置代理解决跨域问题"></a>React配置代理解决跨域问题</h2><p>跨域问题比较常见，而且几乎是必须解决的问题</p><p>比如本地<code>localhost:3000</code>是前端，后端<code>localhost:5000</code>是后端。直接通过<code>ajax</code>或者<code>axios</code>访问的话会被<code>ajax</code>引擎拦截，也就是前端实际就给拦截。但倘若使用代理的话，由于<strong>代理服务器没有<code>ajax</code>引擎拦截</strong>，所以可以发送通过。从而解决跨域问题</p><p>两种方法可以解决。</p><ol><li><p><code>Package.json</code>添加配置</p><figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;proxy&quot;</span><span class="punctuation">:</span><span class="string">&quot;https://localhost:5000&quot;</span></span><br></pre></td></tr></table></figure><p>好用，但是只能指向一个代理地址</p></li><li><p>使用<code>http-proxy-middleware</code>模块解决</p></li></ol><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> proxy = <span class="built_in">require</span>(<span class="string">&quot;http-proxy-middleware&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">function</span>(<span class="params">app</span>) &#123;</span><br><span class="line">  app.<span class="title function_">use</span>(</span><br><span class="line">  <span class="title function_">proxy</span>(<span class="string">&#x27;/api1&#x27;</span>,&#123;</span><br><span class="line">      <span class="attr">target</span>:<span class="string">&quot;http://localhost:5000&quot;</span>,</span><br><span class="line">      <span class="attr">changeOrigin</span>:<span class="literal">true</span>,</span><br><span class="line">      <span class="attr">pathRewite</span>:&#123;<span class="string">&#x27;^/api1&#x27;</span>:<span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>请求<code>https://localhost:3000/api1/student</code>,proxy里的<code>api1</code>匹配到请求地址3000后的<code>api1</code>,就把请求转向了target地址，又因为pathRewrite去换了<code>api1</code>，最终实际请求的地址是<code>https://localhost:5000/student</code></p>]]></content>
-      
-      
-      
-        <tags>
+            <tag> 代理 </tag>
             
-            <tag> 代理,react,前端 </tag>
+            <tag> 拦截器 </tag>
             
         </tags>
       
@@ -80,6 +65,25 @@
     
     
     <entry>
+      <title>React配置代理解决跨域问题</title>
+      <link href="/2022/07/21/React%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/"/>
+      <url>/2022/07/21/React%E9%85%8D%E7%BD%AE%E4%BB%A3%E7%90%86%E8%A7%A3%E5%86%B3%E8%B7%A8%E5%9F%9F%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h2 id="React配置代理解决跨域问题"><a href="#React配置代理解决跨域问题" class="headerlink" title="React配置代理解决跨域问题"></a>React配置代理解决跨域问题</h2><p>跨域问题比较常见，而且几乎是必须解决的问题</p><p>比如本地<code>localhost:3000</code>是前端，后端<code>localhost:5000</code>是后端。直接通过<code>ajax</code>或者<code>axios</code>访问的话会被<code>ajax</code>引擎拦截，也就是前端实际就给拦截。但倘若使用代理的话，由于<strong>代理服务器没有<code>ajax</code>引擎拦截</strong>，所以可以发送通过。从而解决跨域问题</p><p>两种方法可以解决。</p><ol><li><p><code>Package.json</code>添加配置</p><figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="attr">&quot;proxy&quot;</span><span class="punctuation">:</span><span class="string">&quot;https://localhost:5000&quot;</span></span><br></pre></td></tr></table></figure><p>好用，但是只能指向一个代理地址</p></li><li><p>使用<code>http-proxy-middleware</code>模块解决</p></li></ol><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> proxy = <span class="built_in">require</span>(<span class="string">&quot;http-proxy-middleware&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="keyword">function</span>(<span class="params">app</span>) &#123;</span><br><span class="line">  app.<span class="title function_">use</span>(</span><br><span class="line">  <span class="title function_">proxy</span>(<span class="string">&#x27;/api1&#x27;</span>,&#123;</span><br><span class="line">      <span class="attr">target</span>:<span class="string">&quot;http://localhost:5000&quot;</span>,</span><br><span class="line">      <span class="attr">changeOrigin</span>:<span class="literal">true</span>,</span><br><span class="line">      <span class="attr">pathRewite</span>:&#123;<span class="string">&#x27;^/api1&#x27;</span>:<span class="string">&#x27;&#x27;</span>&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>请求<code>https://localhost:3000/api1/student</code>,proxy里的<code>api1</code>匹配到请求地址3000后的<code>api1</code>,就把请求转向了target地址，又因为pathRewrite去换了<code>api1</code>，最终实际请求的地址是<code>https://localhost:5000/student</code></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 代理,react,前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>前端`axios`接口的封装</title>
       <link href="/2022/07/21/%E5%89%8D%E7%AB%AFaxios%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%B0%81%E8%A3%85/"/>
       <url>/2022/07/21/%E5%89%8D%E7%AB%AFaxios%E6%8E%A5%E5%8F%A3%E7%9A%84%E5%B0%81%E8%A3%85/</url>
@@ -90,7 +94,11 @@
       
         <tags>
             
-            <tag> axios react 前端 </tag>
+            <tag> react </tag>
+            
+            <tag> 前端 </tag>
+            
+            <tag> axios </tag>
             
         </tags>
       
@@ -135,7 +143,11 @@
       
         <tags>
             
-            <tag> javascript react 前端 </tag>
+            <tag> javascript </tag>
+            
+            <tag> react </tag>
+            
+            <tag> 前端 </tag>
             
         </tags>
       
